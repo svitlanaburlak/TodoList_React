@@ -2,10 +2,16 @@ import PropTypes from 'prop-types';
 
 import './counter.scss';
 
-function Counter () {
+function Counter ( {counter} ) {
   return (
-    <p className="counter">2 tâches en cours</p>
+    <p className="counter" 
+      value={counter}
+    > tâches en cours</p>
   );
+}
+
+Counter.propTypes = {
+  counter: PropTypes.number.isRequired,
 }
 
 export default Counter;

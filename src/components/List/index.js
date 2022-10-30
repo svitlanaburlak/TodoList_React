@@ -3,14 +3,24 @@ import PropTypes from 'prop-types';
 import Item from './item';
 import './list.scss';
 
-function List () {
+function List ( {tasks} ) {
   return (
     <ul>
-      <Item />
-      <Item />
-      <Item />
+      {
+        tasks.map((task) => (
+          <Item {...task} key={task.id} />
+        ))
+      }
     </ul>
   );
+}
+
+List.protoTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+    }).isRequired,
+  ).isRequired,
 }
 
 export default List;
