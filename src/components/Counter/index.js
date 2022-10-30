@@ -5,8 +5,8 @@ import './counter.scss';
 function Counter ( {counter} ) {
   return (
     <p className="counter" 
-      value={counter}
-    > tâches en cours</p>
+      value={counter.toString()}
+    >{counter} tâches en cours</p>
   );
 }
 

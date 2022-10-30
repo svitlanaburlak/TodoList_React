@@ -12,7 +12,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: Number(1),
+      counter: tasks.length,
       task: '',
     };
     this.handleAddTask = this.handleAddTask.bind(this);
