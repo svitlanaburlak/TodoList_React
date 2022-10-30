@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import './form.scss';
+
 function Form () {
   return (
     <form className="form">

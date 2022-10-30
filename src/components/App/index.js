@@ -19,7 +19,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <h1>List</h1>
         <Form />
         <Counter />
         <List />
