@@ -13,7 +13,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       tasks: tasksList,
-      // counter: tasksList.length,
       inputTaskLabel: '',  
     };
 
@@ -28,10 +27,10 @@ class App extends React.Component {
   }
 
   handleFormSubmit(){
-    console.log('submit in handler');
+    // console.log('submit in handler');
     const { inputTaskLabel, tasks } = this.state;
     const idTasksArray = tasks.map((task) => task.id);
-    // find the highest id in array
+    // find the highest id in array in the copy of array with ids (...)
     const highestId = Math.max(...idTasksArray);
     const newId = highestId + 1;
 
@@ -41,17 +40,20 @@ class App extends React.Component {
       done: false,
     };
 
+    // stockage par reference (tasks = tasksList) et stockage par valeur (...array)
     // make a copy on tasks array with a new task added
     const tasksCopy = [...tasks];
     tasksCopy.push(newTask);
     this.setState({
       tasks: tasksCopy,
+      // erase input after submit
+      inputTaskLabel: '',
     });
   }
   
   render() {
     const { tasks, inputTaskLabel } = this.state;
-    const notDoneTasks = tasksList.filter((item) => item.done === false);
+    const notDoneTasks = tasks.filter((item) => item.done === false);
     const nbNotDone =  notDoneTasks.length;
 
     return (
