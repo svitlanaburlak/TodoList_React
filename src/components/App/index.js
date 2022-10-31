@@ -18,12 +18,37 @@ class App extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleCheckChange = this.handleCheckChange.bind(this);
   }
 
   handleInputChange(newValue) {
     this.setState({
       inputTaskLabel: newValue,
     })
+  }
+
+  handleCheckChange(id){
+    const { tasks } = this.state;
+    //copie par valeur
+    const newTasksArray = tasks.map((task) =>{
+      if(task.id !== id) {
+        return task;
+      }
+      // return {
+      //   id: id,
+      //   label: task.label,
+      //   done: !task.done,
+      // }  
+      // simplified version to midifiy just necessary elements
+      return {
+        ...task,
+        done: !task.done,
+      };
+    });
+
+    this.setState({
+      tasks: newTasksArray,
+    });
   }
 
   handleFormSubmit(){
@@ -55,6 +80,9 @@ class App extends React.Component {
     const { tasks, inputTaskLabel } = this.state;
     const notDoneTasks = tasks.filter((item) => item.done === false);
     const nbNotDone =  notDoneTasks.length;
+    const doneTasks = tasks.filter((item) => item.done === true);
+    // to show fist not done tasks and after done
+    const orderedTasks = [...notDoneTasks, ...doneTasks];
 
     return (
       <div className="app">
@@ -64,7 +92,7 @@ class App extends React.Component {
           handleFormSubmit={this.handleFormSubmit}
         />
         <Counter counter={nbNotDone} />
-        <List tasks={tasks} />
+        <List tasks={orderedTasks} handleCheckChange={this.handleCheckChange} />
       </div>
     );
   } 

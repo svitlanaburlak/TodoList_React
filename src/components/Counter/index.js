@@ -3,6 +3,7 @@ import React from 'react';
 
 import './counter.scss';
 
+// PureComponent
 class Counter extends React.Component {
   render () {
     const { counter } = this.props;
