@@ -8,7 +8,7 @@ function List ( {tasks} ) {
     <ul>
       {
         tasks.map((task) => (
-          <Item {...task} key={task.id} />
+          <Item {...task} />
         ))
       }
     </ul>

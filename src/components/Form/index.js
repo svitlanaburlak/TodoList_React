@@ -2,23 +2,33 @@ import PropTypes from 'prop-types';
 
 import './form.scss';
 
-function Form ( {task, addTask} ) {
+function Form ( { inputTaskLabel, handleInputChange, handleFormSubmit } ) {
   return (
-    <form className="form">
+    <form 
+      className="form"
+      onSubmit={(event) => {
+        event.preventDefault();
+        handleFormSubmit();
+      }}
+    >
       <input 
         type="text" 
         className="form-item" 
         placeholder="Ajouter une tâche"
-        value={task} 
-        onChange={(event) => { addTask(event.target.value);}
-        }/>
+        value={inputTaskLabel}
+        onChange={(event) => {
+          // just onChange without callback make the input appear as letter typed on next line
+          handleInputChange(event.currentTarget.value);
+        }}
+        />
     </form>
   );
 }
 
 Form.propTypes = {
-  task: PropTypes.string.isRequired,
-  addTask: PropTypes.func.isRequired,
+  inputTaskLabel: PropTypes.string.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired,
 }
 
 export default Form;

@@ -51,6 +51,7 @@
   "dependencies": {
     "prop-types": "*",
     "react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "request": "^2.79.0"
   }
 }

@@ -1,1 +1,6 @@
-$mainColor: rgb(15, 19, 241);
+@use "sass:color";
+
+$mainColor: rgba(2, 85, 20, 0.582);
+
+// https://sass-lang.com/documentation/modules
+$darkColor: color.scale($mainColor, $lightness: -60%);

@@ -4,7 +4,7 @@ import Form from 'src/components/Form';
 import Counter from 'src/components/Counter';
 import List from 'src/components/List';
 
-import tasks from 'src/data/tasks';
+import tasksList from 'src/data/tasks';
 import './styles.scss';
 
 // == Component
@@ -12,25 +12,56 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: tasks.length,
-      task: '',
+      tasks: tasksList,
+      // counter: tasksList.length,
+      inputTaskLabel: '',  
     };
-    this.handleAddTask = this.handleAddTask.bind(this);
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  handleAddTask(value) {
-    console.log(value);
+  handleInputChange(newValue) {
     this.setState({
-      task: value,
+      inputTaskLabel: newValue,
     })
+  }
+
+  handleFormSubmit(){
+    console.log('submit in handler');
+    const { inputTaskLabel, tasks } = this.state;
+    const idTasksArray = tasks.map((task) => task.id);
+    // find the highest id in array
+    const highestId = Math.max(...idTasksArray);
+    const newId = highestId + 1;
+
+    const newTask = {
+      id: newId,
+      label: inputTaskLabel,
+      done: false,
+    };
+
+    // make a copy on tasks array with a new task added
+    const tasksCopy = [...tasks];
+    tasksCopy.push(newTask);
+    this.setState({
+      tasks: tasksCopy,
+    });
   }
   
   render() {
-    const { counter, task } = this.state;
+    const { tasks, inputTaskLabel } = this.state;
+    const notDoneTasks = tasksList.filter((item) => item.done === false);
+    const nbNotDone =  notDoneTasks.length;
+
     return (
       <div className="app">
-        <Form task={task} addTask={this.handleAddTask} />
-        <Counter counter={counter} />
+        <Form 
+          inputTaskLabel={inputTaskLabel} 
+          handleInputChange={this.handleInputChange} 
+          handleFormSubmit={this.handleFormSubmit}
+        />
+        <Counter counter={nbNotDone} />
         <List tasks={tasks} />
       </div>
     );

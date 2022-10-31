@@ -1,15 +1,17 @@
 @use "/src/styles/vars";
 
-.list-item {
+.list {
+  &-item {
   display: block;
   background: vars.$mainColor;
   border-radius: 3px;
   padding: 1rem;
   margin: 0.5rem 0;
   color: bisque
-}
+  }
 
-.list-item--done {
-  opacity: 0.5;
-  text-decoration: line-through;
+  &-item--done {
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
 }

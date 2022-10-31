@@ -1,10 +1,20 @@
 import PropTypes from 'prop-types';
 
-function Item( {label, done} ) {
+function Item( {id, label, done} ) {
+
+  let cssClass = 'list-item';
+
+  if (done) {
+    cssClass += ' list-item--done';
+  }
+  
+  const taskId = `task-${id}`;
+
   return (
-    <li>
-      <label className="list-item list-item--done">
-        <input type="checkbox" checked />
+    // better not to put just number as a key to avoid doubles
+    <li key={taskId}>
+      <label className={cssClass} htmlFor={taskId}>
+        <input id={taskId} type="checkbox" checked={done} />
         {label}
       </label>
     </li>
@@ -12,6 +22,7 @@ function Item( {label, done} ) {
 }
 
 Item.propTypes = {
+  id: PropTypes.number.isRequired,
   label: PropTypes.string.isRequired,
   done: PropTypes.bool.isRequired,
 }

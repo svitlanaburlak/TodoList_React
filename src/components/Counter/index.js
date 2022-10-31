@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import './counter.scss';
 
-function Counter ( {counter} ) {
+function Counter ({ counter }) {
   return (
     <p className="counter" 
       value={counter.toString()}
